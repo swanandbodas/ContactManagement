@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 using System;
 
 namespace ContactManagement
@@ -33,6 +34,9 @@ namespace ContactManagement
 
             services.AddSingleton<IContactDataLayer, ContactDataLayer>();
 
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1", new Info() { Title = "Contact Management API", Version="v1" });
+            });
             //var connection = @"Server=.\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;ConnectRetryCount=0";
             //services.AddDbContext<ContactDBContext>
             //    (options => options.UseSqlServer(connection));
@@ -51,9 +55,23 @@ namespace ContactManagement
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc(routes=>
+            app.UseMvc(routes =>
             {
                 routes.MapRoute("default", "{controller=Contact}/{action=Get}/{id?}");
+            });
+
+            var swaggerOptions = new SwaggerOptions();
+            Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
+
+
+            app.UseSwagger(
+                option=>
+                { option.RouteTemplate = "/swagger/{documentName}/swagger.json"; });
+
+            app.UseSwaggerUI(c=>
+            {
+                c.SwaggerEndpoint("v1/swagger.json", "Contact Management API");
+                c.RoutePrefix = string.Empty;
             });
         }
     }

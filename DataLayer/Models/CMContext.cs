@@ -37,7 +37,8 @@ namespace DataLayer.Models
             {
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .ValueGeneratedNever();
+                    .UseSqlServerIdentityColumn();
+                    //.ValueGeneratedNever();
 
                 entity.Property(e => e.ContactNumber)
                     .HasMaxLength(20)
@@ -47,9 +48,12 @@ namespace DataLayer.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.LasrName)
+                entity.Property(e => e.LastName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Active)                    
+                    .HasDefaultValue(true);
             });
         }
 
