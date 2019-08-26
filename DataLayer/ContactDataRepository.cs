@@ -1,24 +1,18 @@
 ﻿using DataLayer.Models;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace DataLayer
 {
-    public class ContactDataLayer : IContactDataLayer
+    public class ContactDataRepository : IContactDataRepository
     {
-        //CMContext contactDataContext;
-        public ContactDataLayer()//CMContext contactDataContext)
-        {
-            //this.contactDataContext = contactDataContext;
-        }
         public IEnumerable<Contact> GetContacts()
         {
             CMContext contactDataContext = new CMContext();
             return contactDataContext.Contact.ToList();
         }
 
-        public void DeleteContact(int id)
+        public int DeleteContact(int id)
         {
             using (CMContext contactDataContext = new CMContext())
             {
@@ -29,6 +23,8 @@ namespace DataLayer
                     contactDataContext.Update(contact);
                     contactDataContext.SaveChanges();
                     transaction.Commit();
+
+                    return contact != null ? 1 : 0;
                 }
             }
         }
@@ -66,5 +62,9 @@ namespace DataLayer
             }
         }
 
+        public Contact GetContact(int id)
+        {
+            return GetContacts()?.Where(c => c.Id == id)?.FirstOrDefault<Contact>();
+        }
     }
 }

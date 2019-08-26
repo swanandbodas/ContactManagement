@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.IO;
 
 namespace DataLayer.Models
@@ -23,11 +22,10 @@ namespace DataLayer.Models
             if (!optionsBuilder.IsConfigured)
             {
                 IConfigurationRoot configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())//AppDomain.CurrentDomain.BaseDirectory)
+            .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json")
             .Build();
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(configuration.GetConnectionString("ContactConnection"));
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("ContactConnection"));
             }
         }
 
@@ -38,7 +36,6 @@ namespace DataLayer.Models
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
                     .UseSqlServerIdentityColumn();
-                    //.ValueGeneratedNever();
 
                 entity.Property(e => e.ContactNumber)
                     .HasMaxLength(20)
@@ -56,10 +53,5 @@ namespace DataLayer.Models
                     .HasDefaultValue(true);
             });
         }
-
-        //public static implicit operator CMContext(CMContext v)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

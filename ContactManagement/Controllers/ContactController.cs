@@ -2,6 +2,7 @@
 using DataLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Net.Http;
 
 namespace ContactManagement.Controllers
 {
@@ -9,46 +10,46 @@ namespace ContactManagement.Controllers
     [ApiController]
     public class ContactController : ControllerBase
     {
-        private IContactDataLayer contactDataLayer;
+        private IContactDataRepository contactDataRepository;
 
-        public ContactController(IContactDataLayer contactDataLayer)
+        public ContactController(IContactDataRepository contactDataRepository)
         {
-            this.contactDataLayer = contactDataLayer;
+            this.contactDataRepository = contactDataRepository;
         }
 
         // GET api/contact
         [HttpGet]
         public IEnumerable<Contact> GetContacts()
         {
-            return contactDataLayer.GetContacts();
+            return contactDataRepository.GetContacts();
         }
 
-        //// GET api/contact/5
-        //[HttpGet("{id}")]
-        //public ActionResult<string> Get(int id)
-        //{
-        //    return "value";
-        //}
+        // GET api/contact/5
+        [HttpGet("{id}")]
+        public Contact Get(int id)
+        {
+            return contactDataRepository.GetContact(id);
+        }
 
         // Delete api/contact/<id>
         [HttpDelete("{id}")]
-        public void DeleteContact(int id)
+        public int DeleteContact(int id)
         {
-            contactDataLayer.DeleteContact(id);
+            return contactDataRepository.DeleteContact(id);
         }
 
         // PUT api/contact/5
         [HttpPut("{id}")]
         public void EditContact(int id, [FromBody] Contact editedContact)
         {
-            contactDataLayer.EditContact(id, editedContact);
+            contactDataRepository.EditContact(id, editedContact);
         }
 
-        // DELETE api/contact/5
+        // POST api/contact
         [HttpPost]
         public void CreateContact([FromBody]Contact newContact)
         {
-            contactDataLayer.CreateContact(newContact);
+            contactDataRepository.CreateContact(newContact);
         }
     }
 }

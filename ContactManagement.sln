@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManagement", "Contac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\DataLayer.csproj", "{BF2E44C3-7A67-41FE-AF42-D772CA127812}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentManagement.Test", "ContentManagement.Test\ContentManagement.Test.csproj", "{321EF3F4-ADDF-43DC-BA63-D0BE57EEDA47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BF2E44C3-7A67-41FE-AF42-D772CA127812}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF2E44C3-7A67-41FE-AF42-D772CA127812}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF2E44C3-7A67-41FE-AF42-D772CA127812}.Release|Any CPU.Build.0 = Release|Any CPU
+		{321EF3F4-ADDF-43DC-BA63-D0BE57EEDA47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{321EF3F4-ADDF-43DC-BA63-D0BE57EEDA47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{321EF3F4-ADDF-43DC-BA63-D0BE57EEDA47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{321EF3F4-ADDF-43DC-BA63-D0BE57EEDA47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

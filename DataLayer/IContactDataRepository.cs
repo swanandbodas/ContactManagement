@@ -3,11 +3,12 @@ using System.Collections.Generic;
 
 namespace DataLayer
 {
-    public interface IContactDataLayer
+    public interface IContactDataRepository
     {
         void CreateContact(Contact newContact);
-        void DeleteContact(int id);
+        int DeleteContact(int id);
         void EditContact(int id, Contact editedContact);
         IEnumerable<Contact> GetContacts();
+        Contact GetContact(int id);
     }
 }

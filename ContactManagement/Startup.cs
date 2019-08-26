@@ -1,12 +1,10 @@
 ﻿using DataLayer;
-using DataLayer.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
-using System;
 
 namespace ContactManagement
 {
@@ -22,25 +20,14 @@ namespace ContactManagement
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.Configure<CookiePolicyOptions>(options =>
-            //{
-            //    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-            //    options.CheckConsentNeeded = context => true;
-            // //   options.MinimumSameSitePolicy = SameSiteMode.None;
-            //});
-            //var builder = new ConfigurationBuilder().SetBasePath(AppContext.BaseDirectory).AddJsonFile("appSetting;s.json")
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddSingleton<CMContext, CMContext>();
 
-            services.AddSingleton<IContactDataLayer, ContactDataLayer>();
+            services.AddSingleton<IContactDataRepository, ContactDataRepository>();
 
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new Info
                 { Title = "Contact Management API", Version="v1" });
             });
-            //var connection = @"Server=.\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;ConnectRetryCount=0";
-            //services.AddDbContext<ContactDBContext>
-            //    (options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
