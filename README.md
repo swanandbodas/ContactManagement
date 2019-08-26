@@ -1,7 +1,7 @@
 # ContactManagement
 
 PreRequisites:
-1.  .Net Core 2.0
+1.  .Net Core 2.1
 2.  SQL Express 14.0
 3.  Swagger is configured. But if due to browser issues it poses problems Postman would be needed.
 
