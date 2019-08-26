@@ -35,7 +35,8 @@ namespace ContactManagement
             services.AddSingleton<IContactDataLayer, ContactDataLayer>();
 
             services.AddSwaggerGen(c => {
-                c.SwaggerDoc("v1", new Info() { Title = "Contact Management API", Version="v1" });
+                c.SwaggerDoc("v1", new Info
+                { Title = "Contact Management API", Version="v1" });
             });
             //var connection = @"Server=.\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;ConnectRetryCount=0";
             //services.AddDbContext<ContactDBContext>
@@ -64,14 +65,11 @@ namespace ContactManagement
             Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
 
 
-            app.UseSwagger(
-                option=>
-                { option.RouteTemplate = "/swagger/{documentName}/swagger.json"; });
-
+            app.UseSwagger();
+  
             app.UseSwaggerUI(c=>
             {
-                c.SwaggerEndpoint("v1/swagger.json", "Contact Management API");
-                c.RoutePrefix = string.Empty;
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contact Management API");
             });
         }
     }
